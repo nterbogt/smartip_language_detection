@@ -1,0 +1,18 @@
+smartip_language_detection.smartip_language_mapping.*:
+  type: config_entity
+  label: 'Mapping entity config'
+  mapping:
+    uuid:
+      type: string
+    id:
+      type: string
+      label: 'ID'
+    label:
+      type: label
+      label: 'Label'
+    country:
+      type: string
+      label: 'Country'
+    language:
+      type: string
+      label: 'Language'

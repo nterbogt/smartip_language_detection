@@ -1,0 +1,5 @@
+entity.smartip_language_mapping.add_form:
+  route_name: 'entity.smartip_language_mapping.add_form'
+  title: 'Add mapping'
+  appears_on:
+    - entity.smartip_language_mapping.collection

@@ -1,0 +1,7 @@
+smartip.language_detection:
+  path: '/admin/config/regional/language/detection/smartip'
+  defaults:
+    _title: 'Smart IP Language Detection configuration'
+    _form: '\Drupal\smartip_language_detection\Form\SmartIpLanguageDetectionForm'
+  requirements:
+    _permission: 'administer languages'

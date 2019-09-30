@@ -1,0 +1,34 @@
+<?php
+
+/**
+ * @file
+ * Module maintenance functions for install, uninstall and updates.
+ */
+
+use Drupal\smartip_language_detection\Entity\SmartIpLanguageMapping;
+
+/**
+ * Create Smart IP language mapping entity based on previous configs.
+ */
+function smartip_language_detection_update_8100() {
+  $mappings_config = \Drupal::configFactory()->getEditable('smartip_language_detection.mappings');
+  $config_mappings = $mappings_config->get('detection');
+
+  if (empty($config_mappings)) {
+    return;
+  }
+
+  foreach ($config_mappings as $country => $language) {
+    $mapping = SmartIpLanguageMapping::create([
+      'country' => $country,
+      'language' => $language,
+    ]);
+    try {
+      $mapping->save();
+    }
+    catch (\Exception $e) {
+    }
+  }
+
+  $mappings_config->delete();
+}
