@@ -32,3 +32,12 @@ function smartip_language_detection_update_8100() {
 
   $mappings_config->delete();
 }
+
+/**
+ * Remove the reset functionality.
+ */
+function smartip_language_detection_update_8101() {
+  $config = \Drupal::configFactory()->getEditable('smartip_language_detection.settings');
+  $config->clear('redirect');
+  $config->save();
+}

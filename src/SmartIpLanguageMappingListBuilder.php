@@ -31,13 +31,4 @@ class SmartIpLanguageMappingListBuilder extends ConfigEntityListBuilder {
     return $row + parent::buildRow($entity);
   }
 
-  /**
-   * {@inheritdoc}
-   */
-  public function render() {
-    $build = parent::render();
-    $build['config_form'] = \Drupal::formBuilder()->getForm(SmartIpLanguageDetectionForm::class);
-    return $build;
-  }
-
 }

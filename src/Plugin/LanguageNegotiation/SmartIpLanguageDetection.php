@@ -89,43 +89,7 @@ class SmartIpLanguageDetection extends LanguageNegotiationMethodBase implements 
     // Update langcode based on mapping values.
     $mapping_id = reset($mapping_ids);
     $mapping = SmartIpLanguageMapping::load($mapping_id);
-    $langcode = $mapping->getLanguage();
-
-    // Redirect if configure to do so.
-    $redirect = $this->config->get('smartip_language_detection.settings')->get('redirect') ?? FALSE;
-    // Don't redirect when the system is in maintenance mode.
-    if ($redirect === 1 && !$this->state->get('system.maintenance_mode')) {
-      $this->redirectToLangcodePath($request, $langcode);
-    }
-
-    return $langcode;
-  }
-
-  /**
-   * Redirect the user to the language path.
-   *
-   * @param \Symfony\Component\HttpFoundation\Request $request
-   *   The HTTP request.
-   * @param string $langcode
-   *   The Drupal language code specified.
-   */
-  private function redirectToLangcodePath(Request $request, $langcode) {
-    $current_path = \Drupal::service('path.current')->getPath();
-    $base_path = base_path();
-
-    if ($current_path !== $base_path) {
-      return;
-    }
-
-    $response = new RedirectResponse($base_path . $langcode);
-    $response->prepare($request);
-    // Make sure to trigger kernel events.
-    \Drupal::service('kernel')->terminate($request, $response);
-    // Tag the language detect and redirect for newrelic.
-    if (extension_loaded('newrelic')) {
-      newrelic_name_transaction('smartip_language_detection_redirect');
-    }
-    $response->send();
+    return $mapping->getLanguage();
   }
 
 }
